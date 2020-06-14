@@ -1,14 +1,14 @@
 #pragma once
 #include <iostream>
 
-/*Ã°ÅİÅÅĞò*/
+/*å†’æ³¡æ’åº*/
 void bubble_sort(int* arr, const int size) {
 	if (arr == NULL || size < 2) return;
-	//Íâ²ãÑ­»·¿ØÖÆÅÅĞòÌËÊı£¬¹²n-1ÌË
+	//å¤–å±‚å¾ªç¯æ§åˆ¶æ’åºè¶Ÿæ•°ï¼Œå…±n-1è¶Ÿ
 	for (int i = 0; i < size - 1; ++i) {
 		bool swap = false;
-		//ÄÚ²ãÑ­»·¿ØÖÆÃ¿Ò»ÌËÅÅĞò´ÎÊı
-		//×îÄ©Î²µÄi¸öÒÑ¾­±»ÅÅºÃÁË,ËùÒÔjµÄ·¶Î§ÊÇ0µ½size-1-i
+		//å†…å±‚å¾ªç¯æ§åˆ¶æ¯ä¸€è¶Ÿæ’åºæ¬¡æ•°
+		//æœ€æœ«å°¾çš„iä¸ªå·²ç»è¢«æ’å¥½äº†,æ‰€ä»¥jçš„èŒƒå›´æ˜¯0åˆ°size-1-i
 		for (int j = 0; j < size - 1 - i; ++j) {
 			if (arr[j] > arr[j + 1]) {
 				std::swap(arr[j], arr[j + 1]);
@@ -19,128 +19,128 @@ void bubble_sort(int* arr, const int size) {
 	}
 }
 
-/*Ñ¡ÔñÅÅĞò*/
+/*é€‰æ‹©æ’åº*/
 void selection_sort(int* arr, const int size) {
 	if (arr == NULL || size < 2) return;
 	for (int i = 0; i < size - 1; ++i) {
 		int min = i;
-		//ÒÑÅÅĞòĞòÁĞ0µ½i£¬Î´ÅÅĞòĞòÁĞiµ½size-1
-		//ÕÒµ½Î´ÅÅĞòĞòÁĞµÄ×îĞ¡ÔªËØarr[min]
+		//å·²æ’åºåºåˆ—0åˆ°iï¼Œæœªæ’åºåºåˆ—iåˆ°size-1
+		//æ‰¾åˆ°æœªæ’åºåºåˆ—çš„æœ€å°å…ƒç´ arr[min]
 		for (int j = i + 1; j < size; ++j) {
 			if (arr[j] < arr[min]) {
 				min = j;
 			}
 		}
-		//½«ÕÒµ½µÄ×îĞ¡ÔªËØ·Åµ½ÒÑÅÅĞòĞòÁĞµÄÄ©Î²
+		//å°†æ‰¾åˆ°çš„æœ€å°å…ƒç´ æ”¾åˆ°å·²æ’åºåºåˆ—çš„æœ«å°¾
 		std::swap(arr[min], arr[i]);
 	}
 }
 
-/*²åÈëÅÅĞò*/
+/*æ’å…¥æ’åº*/
 void insertion_sort(int* arr, const int size) {
 	if (arr == NULL || size < 2) return;
-	//Ò»¿ªÊ¼µÄÒÑÅÅĞòĞòÁĞ0£¬Î´ÅÅĞòĞòÁĞ1µ½n-1
+	//ä¸€å¼€å§‹çš„å·²æ’åºåºåˆ—0ï¼Œæœªæ’åºåºåˆ—1åˆ°n-1
 	for (int i = 1; i < size; ++i) {
-		//µ±Ç°Î´ÅÅĞòĞòÁĞµÄÒ»¸öÔªËØ
+		//å½“å‰æœªæ’åºåºåˆ—çš„ä¸€ä¸ªå…ƒç´ 
 		int key = arr[i];
-		//ÒÑÅÅĞòĞòÁĞµÄÄ©Î²Î»ÖÃ
+		//å·²æ’åºåºåˆ—çš„æœ«å°¾ä½ç½®
 		int j = i - 1;
 		while (j >= 0 && arr[j] > key) {
 			arr[j + 1] = arr[j];
-			--j;//ÏòÇ°ÒÆ¶¯
+			--j;//å‘å‰ç§»åŠ¨
 		}
-		//²åÈëµ½ÏàÓ¦Î»ÖÃ
+		//æ’å…¥åˆ°ç›¸åº”ä½ç½®
 		arr[j + 1] = key;
 	}
 }
 
-/*Ï£¶ûÅÅĞò*/
+/*å¸Œå°”æ’åº*/
 void shell_sort(int* arr, const  int size) {
 	if (arr == NULL || size < 2) return;
 	int gap = 1;
-	//¶¨Òå¼ä¸ôĞòÁĞ
+	//å®šä¹‰é—´éš”åºåˆ—
 	while (gap < size / 2) {
 		gap = 2 * gap;
 	}
 	while (gap >= 1) {
-		//ÕâÀïÊÇ¼ä¸ôµÄ²åÈëÅÅĞò
+		//è¿™é‡Œæ˜¯é—´éš”çš„æ’å…¥æ’åº
 		for (int i = gap; i < size; ++i) {
 			for (int j = i; j >= gap && (arr[j] < arr[j - gap]); j -= gap) {
 				std::swap(arr[j], arr[j - gap]);
 			}
 		}
-		gap /= 2;	//¸üĞÂ¼ä¸ôÊı
+		gap /= 2;	//æ›´æ–°é—´éš”æ•°
 	}
 }
 
-/*¹é²¢ÅÅĞò¡ª¡ªµİ¹é°æ±¾*/
+/*å½’å¹¶æ’åºâ€”â€”é€’å½’ç‰ˆæœ¬*/
 void merge_sort_recursive_helper(int* arr, int* help, const  int start, const  int end) {
 	if (start >= end) return;
 
-	/*ÒÔÏÂÊÇÊı×é·Ö¸î*/
-	int mid = ((end - start) >> 1) + start;		//ÕÒµ½ÖĞ¼äµã
-	//½«Ô­Êı×é²ğ·Ö³ÉÁ½¶Î
+	/*ä»¥ä¸‹æ˜¯æ•°ç»„åˆ†å‰²*/
+	int mid = ((end - start) >> 1) + start;		//æ‰¾åˆ°ä¸­é—´ç‚¹
+	//å°†åŸæ•°ç»„æ‹†åˆ†æˆä¸¤æ®µ
 	int start1 = start, end1 = mid;
 	int start2 = mid + 1, end2 = end;
 	merge_sort_recursive_helper(arr, help, start1, end1);
 	merge_sort_recursive_helper(arr, help, start2, end2);
 
-	/*ÒÔÏÂÊÇÅÅĞòºÏ²¢*/
+	/*ä»¥ä¸‹æ˜¯æ’åºåˆå¹¶*/
 	int k = start;
-	//½«Á½¶ÎºÏ²¢£¬Ö±µ½Ò»¶ÎÓÃÍê
+	//å°†ä¸¤æ®µåˆå¹¶ï¼Œç›´åˆ°ä¸€æ®µç”¨å®Œ
 	while (start1 <= end1 && start2 <= end2) {
 		help[k++] = (arr[start1] < arr[start2]) ? arr[start1++] : arr[start2++];
 	}
-	//½«Ã»ÓÃÍêµÄÒ»¶ÎÖ±½Ó½ÓÔÚÄ©Î²
+	//å°†æ²¡ç”¨å®Œçš„ä¸€æ®µç›´æ¥æ¥åœ¨æœ«å°¾
 	while (start1 <= end1) help[k++] = arr[start1++];
 	while (start2 <= end2) help[k++] = arr[start2++];
 
-	/*½«¸¨ÖúÊı×éÖÖµÄÔªËØ¸´ÖÆµ½Ô­À´µÄÊı×é*/
+	/*å°†è¾…åŠ©æ•°ç»„ç§çš„å…ƒç´ å¤åˆ¶åˆ°åŸæ¥çš„æ•°ç»„*/
 	for (k = start; k <= end; ++k) {
 		arr[k] = help[k];
 	}
 }
 void merge_sort_recursive(int* arr, const int size) {
 	if (arr == NULL || size < 2) return;
-	//¸¨ÖúÊı×é£¬ÓÃÀ´´æ·ÅÅÅĞòµÄ½á¹û
+	//è¾…åŠ©æ•°ç»„ï¼Œç”¨æ¥å­˜æ”¾æ’åºçš„ç»“æœ
 	int* help = new int[size];
 	merge_sort_recursive_helper(arr, help, 0, size - 1);
 	delete[] help;
 }
-/*¹é²¢ÅÅĞò¡ª¡ªµü´ú°æ±¾*/
+/*å½’å¹¶æ’åºâ€”â€”è¿­ä»£ç‰ˆæœ¬*/
 void merge_sort_iterative(int* arr, const int size) {
 	if (arr == NULL || size < 2) return;
 	int* help = new int[size]();
 	int* a = arr;
-	//Æ¬¶Î³¤¶Èblock = 1,2,4,8....
+	//ç‰‡æ®µé•¿åº¦block = 1,2,4,8....
 	for (int block = 1; block < size; block *= 2) {
-		//Á½Á½±éÀúÆ¬¶Î
+		//ä¸¤ä¸¤éå†ç‰‡æ®µ
 		for (int start = 0; start < size; start += (block * 2)) {
 			int low = start;
-			//È¡start+blockºÍsizeÖÖµÄ½ÏĞ¡Õß£¬·ÀÖ¹Ô½½ç,highÍ¬Àí
+			//å–start+blockå’Œsizeç§çš„è¾ƒå°è€…ï¼Œé˜²æ­¢è¶Šç•Œ,highåŒç†
 			int mid = (start + block) > size ? size : (start + block);
 			int high = (start + block * 2) > size ? size : (start + block * 2);
-			//·Ö³ÉÁ½¶Î£¬Á½¶ÎµÄÆğÊ¼ºÍ½áÊøÏÂ±ê
+			//åˆ†æˆä¸¤æ®µï¼Œä¸¤æ®µçš„èµ·å§‹å’Œç»“æŸä¸‹æ ‡
 			int start1 = low, end1 = mid;
 			int start2 = mid, end2 = high;
 			int k = low;
-			//½«Á½¶ÎºÏ²¢£¬Ö±µ½Ò»¶ÎÓÃÍê
+			//å°†ä¸¤æ®µåˆå¹¶ï¼Œç›´åˆ°ä¸€æ®µç”¨å®Œ
 			while (start1 < end1 && start2 < end2) {
 				help[k++] = a[start1] < a[start2] ? a[start1++] : a[start2++];
 			}
-			//½«Ã»ÓÃÍêµÄÒ»¶ÎÖ±½Ó½ÓÔÚÄ©Î²
+			//å°†æ²¡ç”¨å®Œçš„ä¸€æ®µç›´æ¥æ¥åœ¨æœ«å°¾
 			while (start1 < end1) help[k++] = a[start1++];
 			while (start2 < end2) help[k++] = a[start2++];
 		}
-		//½»»»aºÍhelpÖ¸Õë
+		//äº¤æ¢aå’ŒhelpæŒ‡é’ˆ
 		int* temp = a;
 		a = help;
 		help = a;
 	}
 	/*
-		µ±sizeÊÇÅ¼ÊıµÄÊ±ºò£¬helpºÍa×îºó½á¹ûÖ¸Ïò²»±ä
-		µ±sizeÊÇÆæÊıµÄÊ±ºò£¬helpºÍa×îºóÖ¸ÏòÏà·´
-		×îÖÕhelpÖĞ´æ´¢µÄÊÇÅÅºÃµÄĞòÁĞ£¬Òª½«helpÖĞµÄĞòÁĞ¸´ÖÆµ½Ô­À´µÄarrÖĞ
+		å½“sizeæ˜¯å¶æ•°çš„æ—¶å€™ï¼Œhelpå’Œaæœ€åç»“æœæŒ‡å‘ä¸å˜
+		å½“sizeæ˜¯å¥‡æ•°çš„æ—¶å€™ï¼Œhelpå’Œaæœ€åæŒ‡å‘ç›¸å
+		æœ€ç»ˆhelpä¸­å­˜å‚¨çš„æ˜¯æ’å¥½çš„åºåˆ—ï¼Œè¦å°†helpä¸­çš„åºåˆ—å¤åˆ¶åˆ°åŸæ¥çš„arrä¸­
 	*/
 	if (a != arr) {
 		for (int i = 0; i < size; ++i) {
@@ -151,28 +151,29 @@ void merge_sort_iterative(int* arr, const int size) {
 	delete[] help;
 }
 
-/*µü´úºÍµİ¹é¾ùÊ¹ÓÃ*/
+/*è¿­ä»£å’Œé€’å½’å‡ä½¿ç”¨*/
 int quick_sort_partition(int* arr, int low, int high) {
-	int pivot = arr[low];	//»ù×¼ÔªËØÈ¡×ÓĞòÁĞµÄµÚÒ»¸öÔªËØ
+	int index = (rand() & (high - low)) + low;
+	int pivot = arr[index];	//åŸºå‡†å…ƒç´ å–å­åºåˆ—çš„ç¬¬ä¸€ä¸ªå…ƒç´ 
 	while (low < high) {
-		//ÕÒµ½Ò»¸ö±È»ù×¼ÔªËØ´óµÄÔªËØ£¬ºÍ»ù×¼ÔªËØ½øĞĞ½»»»
+		//æ‰¾åˆ°ä¸€ä¸ªæ¯”åŸºå‡†å…ƒç´ å¤§çš„å…ƒç´ ï¼Œå’ŒåŸºå‡†å…ƒç´ è¿›è¡Œäº¤æ¢
 		while (low < high && arr[high] >= pivot) --high;
 		arr[low] = arr[high];
-		//ÕÒµ½Ò»¸ö±È»ù×¼ÔªËØĞ¡µÄÔªËØ£¬ºÍ»ù×¼ÔªËØ½øĞĞ½»»»
+		//æ‰¾åˆ°ä¸€ä¸ªæ¯”åŸºå‡†å…ƒç´ å°çš„å…ƒç´ ï¼Œå’ŒåŸºå‡†å…ƒç´ è¿›è¡Œäº¤æ¢
 		while (low < high && arr[low] <= pivot) ++low;
 		arr[high] = arr[low];
 	}
-	//É¨Ãè½áÊø£¬»Ö¸´»ù×¼ÔªËØµÄÎ»ÖÃ
+	//æ‰«æç»“æŸï¼Œæ¢å¤åŸºå‡†å…ƒç´ çš„ä½ç½®
 	arr[low] = pivot;
-	//·µ»Ø»ù×¼ÔªËØµÄÎ»ÖÃ
+	//è¿”å›åŸºå‡†å…ƒç´ çš„ä½ç½®
 	return low;
 }
-/*¿ìËÙÅÅĞò¡ª¡ªµİ¹é°æ±¾*/
+/*å¿«é€Ÿæ’åºâ€”â€”é€’å½’ç‰ˆæœ¬*/
 void quick_sort_recursive_helper(int* arr, const int low, const int high) {
 	if (low >= high) return;
-	//½«Êı×é·Ö³ÉÁ½²¿·Ö
+	//å°†æ•°ç»„åˆ†æˆä¸¤éƒ¨åˆ†
 	int pivot = quick_sort_partition(arr, low, high);
-	//µİ¹éÅÅĞò×óÓÒ×ÓÊı×é
+	//é€’å½’æ’åºå·¦å³å­æ•°ç»„
 	quick_sort_recursive_helper(arr, low, pivot - 1);
 	quick_sort_recursive_helper(arr, pivot + 1, high);
 }
@@ -180,27 +181,27 @@ void quick_sort_recursive(int* arr, const int size) {
 	if (arr == NULL || size < 2) return;
 	quick_sort_recursive_helper(arr, 0, size - 1);
 }
-/*¿ìËÙÅÅĞò¡ª¡ªµü´ú°æ±¾*/
+/*å¿«é€Ÿæ’åºâ€”â€”è¿­ä»£ç‰ˆæœ¬*/
 void quick_sort_iterative(int* arr, const int size) {
-	//Õ»Êı×é
+	//æ ˆæ•°ç»„
 	int min = 0, max = size - 1;
 	int* stack = new int[size - 1];
 	int top = -1;
-	//½«×î´ó×îĞ¡ÖµÑ¹ÈëÕ»
+	//å°†æœ€å¤§æœ€å°å€¼å‹å…¥æ ˆ
 	stack[++top] = min;
 	stack[++top] = max;
-	//¿ªÊ¼µü´ú
+	//å¼€å§‹è¿­ä»£
 	while (top > -1) {
 		max = stack[top--];
 		min = stack[top--];
-		//½«Êı×é·Ö³ÉÁ½²¿·Ö
+		//å°†æ•°ç»„åˆ†æˆä¸¤éƒ¨åˆ†
 		int pivot = quick_sort_partition(arr, min, max);
-		//Èô»ù×¼ÔªËØ×ó±ß»¹ÓĞÊı¾İÔªËØ
+		//è‹¥åŸºå‡†å…ƒç´ å·¦è¾¹è¿˜æœ‰æ•°æ®å…ƒç´ 
 		if (pivot - 1 > min) {
 			stack[++top] = min;
 			stack[++top] = pivot - 1;
 		}
-		//Èô»ù×¼ÔªËØÓÒ±ß»¹ÓĞÊı¾İÔªËØ
+		//è‹¥åŸºå‡†å…ƒç´ å³è¾¹è¿˜æœ‰æ•°æ®å…ƒç´ 
 		if (pivot + 1 < max) {
 			stack[++top] = pivot + 1;
 			stack[++top] = max;
@@ -209,26 +210,26 @@ void quick_sort_iterative(int* arr, const int size) {
 }
 
 
-/*¶ÑÅÅĞò*/
+/*å †æ’åº*/
 void adjust_heap(int* arr, int cur, int size) {
-	//µ÷ÕûÎª×î´ó¶Ñ,curÎª´ıµ÷Õû½áµã
-	//curµÄ×óº¢×Ó
+	//è°ƒæ•´ä¸ºæœ€å¤§å †,curä¸ºå¾…è°ƒæ•´ç»“ç‚¹
+	//curçš„å·¦å­©å­
 	int child = 2 * cur + 1;
 	while (child < size) {
-		//child + 1ÊÇµ±Ç°½áµãcurµÄÓÒº¢×Ó
-		//Èç¹ûÓĞÓÒº¢×Ó¶øÇÒ´óÓÚ×óº¢×Ó£¬ÔòÓÃÓÒº¢×ÓÀ´Óëcur±È½Ï£¬·ñÔòÓÃ×óº¢×Ó
+		//child + 1æ˜¯å½“å‰ç»“ç‚¹curçš„å³å­©å­
+		//å¦‚æœæœ‰å³å­©å­è€Œä¸”å¤§äºå·¦å­©å­ï¼Œåˆ™ç”¨å³å­©å­æ¥ä¸curæ¯”è¾ƒï¼Œå¦åˆ™ç”¨å·¦å­©å­
 		if ((child + 1) < size && arr[child] < arr[child + 1]) child++;
 
-		//Èô½Ï´óµÄº¢×Ó±Èµ±Ç°½áµãcur´ó
+		//è‹¥è¾ƒå¤§çš„å­©å­æ¯”å½“å‰ç»“ç‚¹curå¤§
 		if (arr[cur] < arr[child]) {
-			//½»»»º¢×Ó½áµãºÍ¸¸½Úµã
+			//äº¤æ¢å­©å­ç»“ç‚¹å’Œçˆ¶èŠ‚ç‚¹
 			std::swap(arr[cur], arr[child]);
-			//´ËÊ±childÖ¸ÏòµÄÊÇÔ­À´µÄ¸¸½áµã
-			//¼ÌĞøÅĞ¶ÏÔ­À´µÄ¸¸½áµãÊÇ·ñĞèÒª¼ÌĞøµ÷Õû
+			//æ­¤æ—¶childæŒ‡å‘çš„æ˜¯åŸæ¥çš„çˆ¶ç»“ç‚¹
+			//ç»§ç»­åˆ¤æ–­åŸæ¥çš„çˆ¶ç»“ç‚¹æ˜¯å¦éœ€è¦ç»§ç»­è°ƒæ•´
 			cur = child;
 			child = 2 * child + 1;
 		}
-		//´ıµ÷Õû½áµãĞ¡ÓÚÆä×óÓÒº¢×Ó£¬²»ÓÃµ÷Õû£¬Ö±½Ó½áÊø
+		//å¾…è°ƒæ•´ç»“ç‚¹å°äºå…¶å·¦å³å­©å­ï¼Œä¸ç”¨è°ƒæ•´ï¼Œç›´æ¥ç»“æŸ
 		else {
 			break;
 		}
@@ -237,48 +238,48 @@ void adjust_heap(int* arr, int cur, int size) {
 void heap_sort(int* arr, int size) {
 	if (arr == NULL || size < 2) return;
 
-	//½¨¶Ñ: ×îºóÒ»¸ö·ÇÒ¶×Ó½áµãµÄÎ»ÖÃÊÇi = (size - 1) / 2£¬´ÓËü¿ªÊ¼ÒÀ´ÎÏòÉÏµ÷Õû
+	//å»ºå †: æœ€åä¸€ä¸ªéå¶å­ç»“ç‚¹çš„ä½ç½®æ˜¯i = (size - 1) / 2ï¼Œä»å®ƒå¼€å§‹ä¾æ¬¡å‘ä¸Šè°ƒæ•´
 	for (int i = (size - 1) / 2; i >= 0; --i) {
 		adjust_heap(arr, i, size);
 	}
-	//½«´ó¸ù¶Ñ·´ÏòÊä³ö
+	//å°†å¤§æ ¹å †åå‘è¾“å‡º
 	for (int i = size - 1; i > 0; --i) {
 		std::swap(arr[i], arr[0]);
 		adjust_heap(arr, 0, i);
 	}
 }
 
-/*¼ÆÊıÅÅĞò*/
+/*è®¡æ•°æ’åº*/
 void count_sort(int* arr, const int size) {
 	if (arr == NULL || size < 2) return;
 
 	int min = arr[0], max = arr[0];
-	//Ñ°ÕÒ×î´óÖµmaxºÍ×îĞ¡Öµmin
+	//å¯»æ‰¾æœ€å¤§å€¼maxå’Œæœ€å°å€¼min
 	for (int i = 1; i < size; ++i) {
 		if (min > arr[i]) min = arr[i];
 		if (max < arr[i]) max = arr[i];
 	}
-	//count_num = 1£¬ËµÃ÷Êı×éÖĞµÄÔªËØÈ«²¿Ò»Ñù
+	//count_num = 1ï¼Œè¯´æ˜æ•°ç»„ä¸­çš„å…ƒç´ å…¨éƒ¨ä¸€æ ·
 	int count_num = max - min + 1;
 	if (count_num < 2) return;
-	//ÓÃÓÚ¼ÆÊıµÄÊı×é,³õÊ¼ÔªËØ¶¼ÊÇ0
+	//ç”¨äºè®¡æ•°çš„æ•°ç»„,åˆå§‹å…ƒç´ éƒ½æ˜¯0
 	int* help = new int[count_num]();
-	//¼ÆËãÊı×éÖĞÃ¿¸öÔªËØi³öÏÖµÄ´ÎÊı£¬´æ´¢µ½help¡¾i¡¿ÖĞ
+	//è®¡ç®—æ•°ç»„ä¸­æ¯ä¸ªå…ƒç´ iå‡ºç°çš„æ¬¡æ•°ï¼Œå­˜å‚¨åˆ°helpã€iã€‘ä¸­
 	for (int i = 0; i < size; ++i) {
 		help[arr[i] - min]++;
 	}
-	//¼ÆËãÊı×éÖĞĞ¡ÓÚµÈÓÚÃ¿¸öÔªËØµÄ¸öÊı
+	//è®¡ç®—æ•°ç»„ä¸­å°äºç­‰äºæ¯ä¸ªå…ƒç´ çš„ä¸ªæ•°
 	for (int i = min + 1; i <= max; ++i) {
 		int index = i - min;
 		help[i - min] += help[index - 1];;
 	}
-	//½«ÅÅĞò½á¹û´æ·ÅÔÚresultÖĞ
+	//å°†æ’åºç»“æœå­˜æ”¾åœ¨resultä¸­
 	int* res = new int[size];
 	for (int i = size - 1; i >= 0; --i) {
 		res[help[arr[i] - min] - 1] = arr[i];
 		--help[arr[i] - min];
 	}
-	//½«resÊı×éÀïµÄÔªËØ¸´ÖÆµ½arrÊı×éÖĞ
+	//å°†resæ•°ç»„é‡Œçš„å…ƒç´ å¤åˆ¶åˆ°arræ•°ç»„ä¸­
 	for (int i = 0; i < size; ++i) {
 		arr[i] = res[i];
 	}
@@ -286,50 +287,50 @@ void count_sort(int* arr, const int size) {
 	delete[] help;
 }
 
-/*Í°ÅÅĞò*/
+/*æ¡¶æ’åº*/
 void bucket_sort(int* arr, const int size) {
 	if (arr == NULL || size < 2) return;
 
 	int min = arr[0], max = arr[0];
-	//Ñ°ÕÒ×î´óÖµmaxºÍ×îĞ¡Öµmin
+	//å¯»æ‰¾æœ€å¤§å€¼maxå’Œæœ€å°å€¼min
 	for (int i = 1; i < size; ++i) {
 		if (min > arr[i]) min = arr[i];
 		if (max < arr[i]) max = arr[i];
 	}
-	//Í°µÄÊıÁ¿
+	//æ¡¶çš„æ•°é‡
 	int bucket_num = (max - min) / size + 1;	
-	//Í³¼ÆÃ¿¸öÍ°ÀïÓĞ¶àÉÙ¸öÔªËØ
+	//ç»Ÿè®¡æ¯ä¸ªæ¡¶é‡Œæœ‰å¤šå°‘ä¸ªå…ƒç´ 
 	int* sizeof_each_bucket = new int[bucket_num]();
 	for (int i = 0; i < size; ++i) {
 		int index_bucket = (arr[i] - min) / size;
 		sizeof_each_bucket[index_bucket]++;
 	}
-	//¿ª±ÙÍ°¿Õ¼ä
+	//å¼€è¾Ÿæ¡¶ç©ºé—´
 	int** bucket_arr = new int* [bucket_num];
 	for (int i = 0; i < bucket_num; ++i) {
 		bucket_arr[i] = new int[(std::size_t)sizeof_each_bucket[i] + 1]();
-		//µÚÒ»Î»´æ·Å¸ÃÍ°µÄsize-1
+		//ç¬¬ä¸€ä½å­˜æ”¾è¯¥æ¡¶çš„size-1
 		bucket_arr[i][0] = 1;
 	}
-	//½«Ã¿¸öÔªËØ·ÅÈëÍ°ÖĞ
+	//å°†æ¯ä¸ªå…ƒç´ æ”¾å…¥æ¡¶ä¸­
 	for (int i = 0; i < size; ++i) {
 		int index_bucket = (arr[i] - min) / size;
 		int cur_bucket_size = bucket_arr[index_bucket][0]++;
 		bucket_arr[index_bucket][cur_bucket_size] = arr[i];
 	}
-	//¶ÔÃ¿¸öÍ°½øĞĞÅÅĞò
+	//å¯¹æ¯ä¸ªæ¡¶è¿›è¡Œæ’åº
 	for (int i = 0; i < bucket_num; ++i) {
 		if (bucket_arr[i][0] == 1 || bucket_arr[i][0] == 2) continue;
 		insertion_sort(bucket_arr[i] + 1, bucket_arr[i][0] - 1);
 	}
-	//½«bucket_arrÖĞµÄÔªËØ¸´ÖÆµ½arrÖĞ
+	//å°†bucket_arrä¸­çš„å…ƒç´ å¤åˆ¶åˆ°arrä¸­
 	int index = 0;
 	for (int i = 0; i < bucket_num; ++i) {
 		for (int j = 1; j < bucket_arr[i][0]; ++j) {
 			arr[index++] = bucket_arr[i][j];
 		}
 	}
-	//ÊÍ·ÅÄÚ´æ
+	//é‡Šæ”¾å†…å­˜
 	delete[] sizeof_each_bucket;
 	for (int i = 0; i < bucket_num; ++i) {
 		delete[] bucket_arr[i];
@@ -337,11 +338,11 @@ void bucket_sort(int* arr, const int size) {
 	delete[] bucket_arr;
 }
 
-/*»ùÊıÅÅĞò*/
+/*åŸºæ•°æ’åº*/
 int get_max_radix(int* arr, const int size) {
-	/*»ñÈ¡Êı×éÖĞµÄ×î´óÊıÎ»*/
+	/*è·å–æ•°ç»„ä¸­çš„æœ€å¤§æ•°ä½*/
 	int max = arr[0];
-	//ÏÈÕÒµ½×î´óÊı×Ö
+	//å…ˆæ‰¾åˆ°æœ€å¤§æ•°å­—
 	for (int i = 1; i < size; ++i) {
 		if (arr[i] > max) max = arr[i];
 	}
@@ -358,7 +359,7 @@ int get_max_radix(int* arr, const int size) {
 	return radix;
 }
 int get_num(const int num, const int pos) {
-	/*»ñÈ¡Êı×ÖnumµÚposÎ»Êı×Ö*/
+	/*è·å–æ•°å­—numç¬¬posä½æ•°å­—*/
 	int temp = 1;
 	for (int i = 0; i < pos - 1; ++i) {
 		temp *= 10;
@@ -368,7 +369,7 @@ int get_num(const int num, const int pos) {
 void radix_sort(int* arr, const int size) {
 	if (arr == NULL || size < 2) return;
 
-	//0-9¹²10¸öÍ°
+	//0-9å…±10ä¸ªæ¡¶
 	int** help = new int* [10]();
 	for (int i = 0; i < 10; ++i) {
 		help[i] = new int[(std::size_t)size + 1]();
@@ -376,21 +377,21 @@ void radix_sort(int* arr, const int size) {
 	}
 
 	int max_radix = get_max_radix(arr, size);
-	//µÚiÎ»ÊıÅÅĞò
+	//ç¬¬iä½æ•°æ’åº
 	for (int radix = 1; radix <= max_radix; ++radix) {
-		//½«Êı×éÖĞµÄÔªËØ£¬°´ÊıÎ»·ÖÅäµ½¸÷¸öÍ°ÖĞ
+		//å°†æ•°ç»„ä¸­çš„å…ƒç´ ï¼ŒæŒ‰æ•°ä½åˆ†é…åˆ°å„ä¸ªæ¡¶ä¸­
 		for (int i = 0; i < size; ++i) {
 			int row = get_num(arr[i], radix);
 			int col = help[row][0]++;
 			help[row][col] = arr[i];
 		}
-		//´Ó¸÷¸öÍ°ÖĞÊÕ¼¯ÔªËØ
+		//ä»å„ä¸ªæ¡¶ä¸­æ”¶é›†å…ƒç´ 
 		int index = 0;
 		for (int row = 0; row < 10; ++row) {
 			for (int col = 1; col < help[row][0]; ++col) {
 				arr[index++] = help[row][col];
 			}
-			//¸´Î»£¬ÏÂÒ»¸öÊıÎ»¼ÌĞøÓÃ
+			//å¤ä½ï¼Œä¸‹ä¸€ä¸ªæ•°ä½ç»§ç»­ç”¨
 			help[row][0] = 1;
 		}
 	}
