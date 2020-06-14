@@ -153,8 +153,9 @@ void merge_sort_iterative(int* arr, const int size) {
 
 /*迭代和递归均使用*/
 int quick_sort_partition(int* arr, int low, int high) {
+	//基准元素取子序列的一个随机元素
 	int index = (rand() & (high - low)) + low;
-	int pivot = arr[index];	//基准元素取子序列的第一个元素
+	int pivot = arr[index];
 	while (low < high) {
 		//找到一个比基准元素大的元素，和基准元素进行交换
 		while (low < high && arr[high] >= pivot) --high;
