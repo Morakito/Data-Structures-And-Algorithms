@@ -164,9 +164,9 @@ int quick_sort_partition(int* arr, int low, int high) {
 		arr[high] = arr[low];
 	}
 	//扫描结束，恢复基准元素的位置
-	arr[low] = pivot;
+	arr[index] = pivot;
 	//返回基准元素的位置
-	return low;
+	return index;
 }
 /*快速排序——递归版本*/
 void quick_sort_recursive_helper(int* arr, const int low, const int high) {
